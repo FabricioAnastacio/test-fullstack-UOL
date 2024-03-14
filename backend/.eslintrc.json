@@ -16,7 +16,7 @@
   "parserOptions": {
     "ecmaVersion": 2019,
     "sourceType": "module",
-    "project": "./app/backend/tsconfig.json"
+    "project": "./backend/tsconfig.json"
   },
   "plugins": [
     "@typescript-eslint",
@@ -71,7 +71,7 @@
       250
     ],
     "max-lines-per-function": [
-      "off",
+      "error",
       {
         "max": 20,
         "skipBlankLines": true,
