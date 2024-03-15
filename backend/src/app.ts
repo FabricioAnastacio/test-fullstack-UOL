@@ -1,11 +1,15 @@
 import express from 'express';
 import router from './routes';
+import sequelize from './database/model';
 
 class App {
   public app: express.Express;
+  public db: typeof sequelize;
 
   constructor() {
     this.app = express();
+
+    this.db = sequelize;
 
     this.config();
 
@@ -32,6 +36,7 @@ class App {
 
   public start(PORT: string | number): void {
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    this.db.sync().then(() => console.log('db is ready'));
   }
 }
 
