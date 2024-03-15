@@ -38,6 +38,12 @@ class UserService {
 
     return { status: 'SUCCESSFUL', data: users };
   }
+
+  public async updateUser(user: IUser, id: number): Promise<ServiceResponse<string>> {
+    await this.userModel.updateUser(user, id);
+
+    return { status: 'SUCCESSFUL', data: 'Updated' };
+  }
 }
 
 export default UserService;

@@ -26,10 +26,10 @@ class ModelUser implements IUserModel {
     return newUser;
   }
 
-  async updateUser(user: IUser, email: string): Promise<void> {
+  async updateUser(user: IUser, id: number): Promise<void> {
     await this.model.update(
       { ...user },
-      { where: { email } },
+      { where: { id } },
     );
   }
 
