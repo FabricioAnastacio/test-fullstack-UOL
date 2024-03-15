@@ -19,4 +19,12 @@ export default class UserController {
 
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async findUserSearch(req: Request, res: Response): Promise<Response> {
+    const { q } = req.query;
+
+    const { status, data } = await this.serviceUser.getUserBySearch(String(q));
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

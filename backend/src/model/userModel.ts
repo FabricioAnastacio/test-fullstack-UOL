@@ -1,11 +1,18 @@
+import { Op } from 'sequelize';
 import UserModel from '../database/model/UserModel';
 import { IUser, IUserModel } from '../interfaces/IUser';
 
 class ModelUser implements IUserModel {
   private model = UserModel;
 
-  async findByEmail(email: string): Promise<IUser | null> {
-    const user = await this.model.findOne({ where: { email } });
+  async findBySearch(keyword: string): Promise<IUser | null> {
+    const user = await this.model.findOne({
+      where: {
+        name: {
+          [Op.like]: `%${keyword}%`,
+        },
+      },
+    });
     return user;
   }
 

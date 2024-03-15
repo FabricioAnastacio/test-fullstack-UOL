@@ -30,6 +30,14 @@ class UserService {
 
     return { status: 'SUCCESSFUL', data: users };
   }
+
+  public async getUserBySearch(keyword: string): Promise<ServiceResponse<IUser>> {
+    const users = await this.userModel.findBySearch(keyword);
+
+    if (!users) return { status: 'NOT_FOUND', data: { message: 'Users not found' } };
+
+    return { status: 'SUCCESSFUL', data: users };
+  }
 }
 
 export default UserService;
