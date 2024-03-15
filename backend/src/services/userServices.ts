@@ -13,10 +13,11 @@ class UserService {
     if (error) return { status: error.status, data: error.data };
 
     const allUsers = await this.userModel.findAllUsers();
-    const causedConflict = allUsers?.find(
-      (people) => (people.email === user.email || people.cpf === user.cpf) && 'error',
+
+    const conflictUser = allUsers?.find(
+      (people) => (people.email === user.email || people.cpf === user.cpf),
     );
-    if (causedConflict) {
+    if (conflictUser) {
       return { status: 'CONFLICT', data: { message: 'CPF or Email already exists' } };
     }
 
@@ -43,10 +44,25 @@ class UserService {
     return { status: 'SUCCESSFUL', data: users };
   }
 
-  public async updateUser(user: IUser, id: number): Promise<ServiceResponse<string>> {
+  public async updateUser(user: IUser, id: number): Promise<ServiceResponse<IUser>> {
+    const validationError = validateDataUser(user);
+    if (validationError) return { status: validationError.status, data: validationError.data };
+
+    const allUsers = await this.userModel.findAllUsers();
+
+    const actualUser = allUsers?.filter((people) => people.id === id)[0];
+    if (!actualUser) return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+
+    const conflictUser = allUsers?.find(
+      (people) => (people.email === user.email || people.cpf === user.cpf) && people.id !== id,
+    );
+    if (conflictUser) {
+      return { status: 'CONFLICT', data: { message: 'CPF or Email already exists' } };
+    }
+
     await this.userModel.updateUser(user, id);
 
-    return { status: 'SUCCESSFUL', data: 'Updated' };
+    return { status: 'SUCCESSFUL', data: { id, ...user } };
   }
 
   public async delUserById(id: number): Promise<ServiceResponse<string>> {
