@@ -33,8 +33,8 @@ class ModelUser implements IUserModel {
     );
   }
 
-  async delete(email: string): Promise<void> {
-    this.model.destroy({ where: { email } });
+  async delete(id: number): Promise<void> {
+    this.model.destroy({ where: { id } });
   }
 }
 

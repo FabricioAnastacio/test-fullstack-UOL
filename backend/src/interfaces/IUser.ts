@@ -12,5 +12,5 @@ export interface IUserModel {
   findBySearch(keyword: string): Promise<IUser | null>,
   createUser(user: IUser): Promise<IUser>,
   updateUser(newDtaUser: IUser, id: number): Promise<void>,
-  delete(email: string): Promise<void>
+  delete(id: number): Promise<void>
 }

@@ -36,4 +36,12 @@ export default class UserController {
 
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async deleteUser(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const { status, data } = await this.serviceUser.delUserById(Number(id));
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

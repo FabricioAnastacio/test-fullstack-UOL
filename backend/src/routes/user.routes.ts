@@ -9,7 +9,7 @@ userRouter.post('/', (req, res) => userController.createUser(req, res));
 userRouter.get('/search', (req, res) => userController.findUserSearch(req, res));
 userRouter.get('/', (req, res) => userController.findAllUsers(req, res));
 userRouter.put('/:id', (req, res) => userController.userUpdate(req, res));
-// userRouter.delete('/delete', (req, res) => userController.deleteUser(req, res));
-// userRouter.delete('/delete', (req, res) => userController.deleteAllUser(req, res));
+userRouter.delete('/:id', (req, res) => userController.deleteUser(req, res));
+// userRouter.delete('/deleteAll', (req, res) => userController.deleteAllUser(req, res));
 
 export default userRouter;

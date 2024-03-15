@@ -44,6 +44,12 @@ class UserService {
 
     return { status: 'SUCCESSFUL', data: 'Updated' };
   }
+
+  public async delUserById(id: number): Promise<ServiceResponse<string>> {
+    await this.userModel.delete(id);
+
+    return { status: 'DELETED', data: { message: 'Deleted' } };
+  }
 }
 
 export default UserService;
