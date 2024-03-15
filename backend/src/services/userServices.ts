@@ -1,6 +1,7 @@
 import { ServiceResponse } from '../interfaces/serviceResponse';
 import { IUser, IUserModel } from '../interfaces/IUser';
 import ModelUser from '../model/userModel';
+import validateDataUser from './validations/validateInput';
 
 class UserService {
   constructor(
@@ -8,15 +9,18 @@ class UserService {
   ) {}
 
   public async addNewUser(user: IUser): Promise<ServiceResponse<IUser>> {
-    const newUser = {
-      name: user.name,
-      cpf: user.cpf,
-      email: user.email,
-      phone: user.phone,
-      status: user.status,
-    };
+    const error = validateDataUser(user);
+    if (error) return { status: error.status, data: error.data };
 
-    const addUser = await this.userModel.createUser(newUser);
+    const allUsers = await this.userModel.findAllUsers();
+    const causedConflict = allUsers?.find(
+      (people) => (people.email === user.email || people.cpf === user.cpf) && 'error',
+    );
+    if (causedConflict) {
+      return { status: 'CONFLICT', data: { message: 'CPF or Email already exists' } };
+    }
+
+    const addUser = await this.userModel.createUser(user);
 
     return { status: 'CREATED', data: addUser };
   }
