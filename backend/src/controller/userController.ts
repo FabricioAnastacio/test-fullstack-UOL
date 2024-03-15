@@ -13,4 +13,10 @@ export default class UserController {
 
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async findAllUsers(req: Request, res: Response): Promise<Response> {
+    const { status, data } = await this.serviceUser.getAllUsers();
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }

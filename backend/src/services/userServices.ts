@@ -20,6 +20,16 @@ class UserService {
 
     return { status: 'CREATED', data: addUser };
   }
+
+  public async getAllUsers(): Promise<ServiceResponse<IUser[]>> {
+    const users = await this.userModel.findAllUsers();
+
+    if (!users || users.length === 0) {
+      return { status: 'NOT_FOUND', data: { message: 'Users not found' } };
+    }
+
+    return { status: 'SUCCESSFUL', data: users };
+  }
 }
 
 export default UserService;
