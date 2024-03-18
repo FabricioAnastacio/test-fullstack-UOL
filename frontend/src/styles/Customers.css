@@ -1,0 +1,32 @@
+.page-customers {
+  padding: 0 200px;
+}
+
+#header-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-init {
+  display: flex;
+}
+
+.header-init img {
+  width: 30px;
+  height: 30px;
+  margin: 25px 10px;
+}
+
+#header-list button {
+  border: 1px solid #E29833;
+  background-color: #E29833;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  &:hover {
+    cursor: pointer;
+    border: 3px solid #E29833;
+  }
+}

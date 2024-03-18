@@ -5,7 +5,7 @@ export const api = [
     email: 'fabio@gmail.com',
     phone: '31990787821',
     cpf: '132.432.543-98',
-    status: 'Active',
+    status: 'Ativo',
   },
   {
     id: 2,

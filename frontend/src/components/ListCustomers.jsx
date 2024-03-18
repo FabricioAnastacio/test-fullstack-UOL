@@ -25,7 +25,7 @@ function ListCustomers() {
               </section>
               <section className="status-button">
                 <div>
-                  <span className={ `span-${user.status.split('', 2).join('')}` } />
+                  <span className={ `span-${user.status[1]}` } />
                   <p>{ user.status }</p>
                 </div>
                 <button>Editar</button>
@@ -34,6 +34,7 @@ function ListCustomers() {
           ))
         }
       </ul>
+      <p>{ `Exibindo ${users.length} clientes` }</p>
     </div>
   );
 }

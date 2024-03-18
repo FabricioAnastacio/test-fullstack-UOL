@@ -6,7 +6,7 @@
   border: 1px solid gray;
   border-radius: 4px;
   padding: 0 40px;
-  margin: 10px;
+  margin: 10px 0 10px -40px;
 }
 
 .list-customers h4 {
@@ -16,7 +16,7 @@
 .list-customers ul {
   display: flex;
   flex-flow: column;
-  margin: 20px 150px;
+  margin: 20px 0px;
 }
 
 .list-customers section {
@@ -35,28 +35,28 @@
   width: 350px;
 }
 
-.span-Ac {
+.span-t {
   background-color: green;
   padding: 6px;
   border-radius: 1em;
   margin-right: 5px;
 }
 
-.span-In {
+.span-n {
   background-color: red;
   padding: 6px;
   border-radius: 1em;
   margin-right: 5px;
 }
 
-.span-Ag {
+.span-g {
   background-color: rgb(189, 176, 0);
   padding: 6px;
   border-radius: 1em;
   margin-right: 5px;
 }
 
-.span-De {
+.span-e {
   background-color: grey;
   padding: 6px;
   border-radius: 1em;
@@ -74,5 +74,6 @@
     background-color: #E29833;
     border: 2px solid #E29833;
     color: white;
+    cursor: pointer;
   }
 }

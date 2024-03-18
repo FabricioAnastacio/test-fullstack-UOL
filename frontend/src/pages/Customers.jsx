@@ -1,16 +1,23 @@
 import React from 'react';
 import ListCustomers from '../components/ListCustomers';
+import '../styles/Customers.css';
 
 function Customers() {
-  const numCustomers = 2;
   return (
     <main className="page-customers">
-      <h1>Painel de clientes</h1>
+      <div className="header-init">
+        <img src="https://cdn-icons-png.flaticon.com/256/3917/3917688.png" alt="img-User" />
+        <h1>Painel de clientes</h1>
+      </div>
       <hr />
-      <h3>Listagem de usuários</h3>
-      <button>Novo cliente</button>
+      <div id="header-list">
+        <div>
+          <h3>Listagem de usuários</h3>
+          <p>Escolha um cliente para visualizar os detalhes</p>
+        </div>
+        <button>Novo cliente</button>
+      </div>
       <ListCustomers />
-      <p>{ `Exibindo ${numCustomers} clientes` }</p>
     </main>
   );
 }
