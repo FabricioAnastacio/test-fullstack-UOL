@@ -1,4 +1,4 @@
-import { afterEach, describe, it } from '@jest/globals';
+// import { afterEach, describe, it } from '@jest/globals';
 import chai, { expect } from 'chai';
 import sinon from 'sinon'
 import chaiHttp from 'chai-http';
@@ -236,6 +236,18 @@ describe('Testa a rota put/user/:id', () => {
       expect(status).to.equal(409);
       expect(body).to.deep.equal({ message: 'CPF or Email already exists' });
     });
+  });
+
+  afterEach(sinon.restore);
+});
+
+describe('Testa a rota delete/user', () => {
+  it('Verifica se é possivel deletar um usuario', async () => {
+    sinon.stub(UserModel, 'destroy').resolves(undefined);
+
+    const { status, body } = await chai.request(app).delete('/user/2');
+
+    expect(status).to.equal(204)
   });
 
   afterEach(sinon.restore);
