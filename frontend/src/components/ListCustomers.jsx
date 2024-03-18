@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { requestDataUsers } from '../services/requests';
 import '../styles/ListCustomers.css';
 import AppContext from '../context/AppContext';
+import { mockUsers } from '../services/mockApi';
 
 function ListCustomers(props) {
   const { navigate } = props;
@@ -16,7 +17,7 @@ function ListCustomers(props) {
           const allUsers = await requestDataUsers();
           setUsers(allUsers);
         } catch (e) {
-          setUsers([]);
+          setUsers(mockUsers);
         }
       }
     )();
