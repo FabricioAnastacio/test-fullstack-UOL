@@ -1,0 +1,54 @@
+form {
+  display: flex;
+  flex-flow: column;
+  align-items: start;
+}
+
+form input, select {
+  padding: 15px 35px;
+  margin-bottom: 20px;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
+form select {
+  background-color: unset;
+  padding-right: 61px;
+  color: gray;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+form div {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+form div button:nth-child(1) {
+  margin-right: 20px;
+  border: 1px solid #E29833;
+  background-color: #E29833;
+  padding: 8px 50px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+form div button:nth-child(2) {
+  border: 1px solid #E29833;
+  background-color: unset;
+  padding: 8px 40px;
+  border-radius: 5px;
+  color: #E29833;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+

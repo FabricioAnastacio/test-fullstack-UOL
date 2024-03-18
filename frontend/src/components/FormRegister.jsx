@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/FormRegister.css';
 
 function FormRegister(props) {
   const { navigate } = props;
@@ -75,12 +76,14 @@ function FormRegister(props) {
         <option value="Desativado">Desativado</option>
         <option value="Aguardando ativação">Aguardando ativação</option>
       </select>
-      <button
-        type="submit"
-      >
-        Criar
-      </button>
-      <button onClick={ handleExit }>Voltar</button>
+      <div>
+        <button
+          type="submit"
+        >
+          Criar
+        </button>
+        <button onClick={ handleExit }>Voltar</button>
+      </div>
     </form>
   );
 }
