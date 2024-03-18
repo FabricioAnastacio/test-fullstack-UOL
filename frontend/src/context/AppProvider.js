@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import AppContext from './AppContext';
 
 export default function AppProvider({ children }) {
-  const values = useMemo(() => {}, []);
+  const [editUser, setEditUser] = useState({});
+
+  const values = useMemo(() => ({
+    editUser,
+    setEditUser,
+  }), [editUser]);
 
   return (
     <AppContext.Provider value={ values }>

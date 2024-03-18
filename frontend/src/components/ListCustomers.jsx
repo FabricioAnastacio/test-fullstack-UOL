@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { requestDataUsers } from '../services/requests';
 import '../styles/ListCustomers.css';
+import AppContext from '../context/AppContext';
 
-function ListCustomers() {
+function ListCustomers(props) {
+  const { navigate } = props;
+  const { setEditUser } = useContext(AppContext);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -17,6 +21,11 @@ function ListCustomers() {
       }
     )();
   }, []);
+
+  const handleEditUser = (user) => {
+    setEditUser(user);
+    navigate('/addUser');
+  };
 
   return (
     <div className="list-customers">
@@ -37,7 +46,7 @@ function ListCustomers() {
                   <span className={ `span-${user.status[1]}` } />
                   <p>{ user.status }</p>
                 </div>
-                <button>Editar</button>
+                <button onClick={ () => handleEditUser(user) }>Editar</button>
               </section>
             </li>
           ))
@@ -47,5 +56,9 @@ function ListCustomers() {
     </div>
   );
 }
+
+ListCustomers.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
 
 export default ListCustomers;

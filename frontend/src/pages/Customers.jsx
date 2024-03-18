@@ -23,7 +23,7 @@ function Customers() {
           </div>
           <button onClick={ handleClick }>Novo cliente</button>
         </div>
-        <ListCustomers />
+        <ListCustomers navigate={ navigate } />
       </main>
     </>
   );

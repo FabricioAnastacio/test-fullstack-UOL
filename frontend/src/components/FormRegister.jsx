@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FormRegister.css';
-import { createUser } from '../services/requests';
+import { createUser, updateUser } from '../services/requests';
+import AppContext from '../context/AppContext';
 
 function FormRegister(props) {
   const { navigate } = props;
+  const { editUser, setEditUser } = useContext(AppContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Ativo');
+  const [buttonName, setNameBtm] = useState('Criar');
+
+  useEffect(() => {
+    if (editUser.id) {
+      setName(editUser.name);
+      setEmail(editUser.email);
+      setCpf(editUser.cpf);
+      setPhone(editUser.phone);
+      setStatus(editUser.status);
+      setNameBtm('Atualizar');
+    }
+  }, [editUser]);
 
   const createNewUser = async () => {
     await createUser({
+      name,
+      email,
+      cpf,
+      phone,
+      status,
+    });
+  };
+
+  const updateDataUser = async () => {
+    await updateUser(`/user/${editUser.id}`, {
       name,
       email,
       cpf,
@@ -33,7 +57,11 @@ function FormRegister(props) {
     else if (!regexEmail.test(email)) alert('E-mail não informado ou incorreto');
     else if (!regexCPF.test(cpf)) alert('CPF não informado ou incorreto');
     else if (!regexPhone.test(phone)) alert('Telefone não informado ou incorreto');
-    else {
+    else if (editUser.id) {
+      await updateDataUser();
+      setEditUser({});
+      navigate('/');
+    } else {
       await createNewUser();
       navigate('/');
     }
@@ -92,7 +120,7 @@ function FormRegister(props) {
         <button
           type="submit"
         >
-          Criar
+          { buttonName }
         </button>
         <button onClick={ handleExit }>Voltar</button>
       </div>
