@@ -1,0 +1,17 @@
+img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+header {
+  display: flex;
+  background-color: #333333;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+header h2 {
+  color: white;
+}
