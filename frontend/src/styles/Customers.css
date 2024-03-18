@@ -8,16 +8,6 @@
   align-items: center;
 }
 
-.header-init {
-  display: flex;
-}
-
-.header-init img {
-  width: 30px;
-  height: 30px;
-  margin: 25px 10px;
-}
-
 #header-list button {
   border: 1px solid #E29833;
   background-color: #E29833;

@@ -4,7 +4,7 @@ img {
   margin-right: 5px;
 }
 
-header {
+header div:nth-child(1) {
   display: flex;
   background-color: #333333;
   align-items: center;
@@ -14,4 +14,15 @@ header {
 
 header h2 {
   color: white;
+}
+
+.header-init {
+  display: flex;
+  margin-left: 185px;
+}
+
+.header-init img {
+  width: 30px;
+  height: 30px;
+  margin: 25px 10px;
 }
