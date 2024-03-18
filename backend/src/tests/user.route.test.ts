@@ -1,8 +1,8 @@
-// import { afterEach, describe, it } from '@jest/globals';
+import { afterEach, describe, it } from '@jest/globals';
 import chai, { expect } from 'chai';
 import sinon from 'sinon'
 import chaiHttp from 'chai-http';
-import { findAllResponse, mockUser } from './mocks/user.mock';
+import { findAllResponse, mockUpdateUser, mockUser } from './mocks/user.mock';
 import { app } from '../app';
 import UserModel from '../database/model/UserModel';
 
@@ -112,7 +112,7 @@ describe('Testa a rota post/user', () => {
   });
 
   afterEach(sinon.restore);
-})
+});
 
 describe('Testa a rota get/user', () => {
   it('Verifica se é possivel visualizar todos os usuarios cadastrados', async () => {
@@ -154,5 +154,89 @@ describe('Testa a rota get/user', () => {
   });
 
   afterEach(sinon.restore);
-})
+});
 
+describe('Testa a rota put/user/:id', () => {
+  it('Verifica se é possivel editar os dados de um usuario', async () => {
+    sinon.stub(UserModel, 'findAll').resolves(findAllResponse as any);
+    sinon.stub(UserModel, 'update').resolves(undefined);
+
+    const { status, body } = await chai.request(app).put('/user/2')
+    .send(mockUpdateUser);
+
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal({
+      id: 2,
+      ...mockUpdateUser
+    });
+  });
+
+  describe('Verifica se as informações de atualização são validadas corretamente', () => {
+    it('Verifica se é possivel atualizar sem a informação de numero de telefone', async () => {
+      sinon.stub(UserModel, 'findAll').resolves(undefined);
+      sinon.stub(UserModel, 'update').resolves(undefined);
+  
+      delete mockUpdateUser.phone;
+
+      const { status, body } = await chai.request(app).put('/user/2')
+      .send(mockUpdateUser);
+  
+      expect(status).to.equal(400);
+      expect(body).to.deep.equal({ message: '"phone" is required' });
+    });
+    it('Verifica se é possivel atualizar sem a informação de CPF', async () => {
+      sinon.stub(UserModel, 'findAll').resolves(undefined);
+      sinon.stub(UserModel, 'update').resolves(undefined);
+  
+      mockUpdateUser.phone = '31098732167';
+      delete mockUpdateUser.cpf;
+
+      const { status, body } = await chai.request(app).put('/user/2')
+      .send(mockUpdateUser);
+  
+      expect(status).to.equal(400);
+      expect(body).to.deep.equal({ message: '"cpf" is required' });
+    });
+    it('Verifica se é possivel atualizar sem a informação de Nome', async () => {
+      sinon.stub(UserModel, 'findAll').resolves(undefined);
+      sinon.stub(UserModel, 'update').resolves(undefined);
+  
+      mockUpdateUser.cpf = '890.345.908-13';
+      delete mockUpdateUser.name;
+
+      const { status, body } = await chai.request(app).put('/user/2')
+      .send(mockUpdateUser);
+  
+      expect(status).to.equal(400);
+      expect(body).to.deep.equal({ message: '"name" is required' });
+    });
+    it('Verifica se é possivel atualizar sem a informação de Email', async () => {
+      sinon.stub(UserModel, 'findAll').resolves(undefined);
+      sinon.stub(UserModel, 'update').resolves(undefined);
+  
+      mockUpdateUser.name = 'Luar';
+      delete mockUpdateUser.email;
+
+      const { status, body } = await chai.request(app).put('/user/2')
+      .send(mockUpdateUser);
+  
+      expect(status).to.equal(400);
+      expect(body).to.deep.equal({ message: '"email" is required' });
+    });
+    it('Verifica se é possivel atualizar caso use informações ja existentes no banco', async () => {
+      sinon.stub(UserModel, 'findAll').resolves(findAllResponse as any);
+      sinon.stub(UserModel, 'update').resolves(undefined);
+  
+      mockUpdateUser.email = findAllResponse[0].email;
+      mockUpdateUser.cpf = findAllResponse[0].cpf;
+
+      const { status, body } = await chai.request(app).put('/user/2')
+      .send(mockUpdateUser);
+  
+      expect(status).to.equal(409);
+      expect(body).to.deep.equal({ message: 'CPF or Email already exists' });
+    });
+  });
+
+  afterEach(sinon.restore);
+});

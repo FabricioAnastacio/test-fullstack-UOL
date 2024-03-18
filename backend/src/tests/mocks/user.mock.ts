@@ -1,6 +1,6 @@
 interface userMock {
   id?: number,
-  name: string,
+  name?: string,
   email?: string,
   phone?: string,
   cpf?: string,
@@ -13,6 +13,14 @@ export const mockUser: userMock = {
   email: 'Juca@gmail.com',
   phone: '31999082321',
   cpf: '092.345.412-48',
+  status: 'Active'
+}
+
+export const mockUpdateUser: userMock = {
+  name: 'Luar',
+  email: 'lua@gmail.com',
+  phone: '31978933456',
+  cpf: '890.345.908-13',
   status: 'Active'
 }
 
