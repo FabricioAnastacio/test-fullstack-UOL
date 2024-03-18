@@ -8,21 +8,22 @@ function FormRegister(props) {
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Ativo');
-  const [isDisabled, setStateButton] = useState(true);
 
-  useEffect(() => {
-    const regexName = /^([A-Z]{1}[a-z]+[ A-Z]{2}[a-z]+[ A-Z]{2}[a-z]+[ A-z]+)$/;
-    const regexEmail = /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
-    const regexCPF = /^([0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2})$/;
-    setStateButton(
-      regexName.test(name)
-      && regexEmail.test(email)
-      && regexCPF.test(cpf),
-    );
-  }, [email, name, cpf]);
+  useEffect(() => {}, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const regexName = /^([A-Z]{1}[a-z ]+)$/;
+    const regexEmail = /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    const regexCPF = /^([0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2})$/;
+    const regexPhone = /^\(?[1-9]{2}\)? ?(?:[2-8]|9[0-9])[0-9]{3}-?[0-9]{4}$/;
+
+    if (!regexName.test(name)) alert('Nome não informado');
+    else if (!regexEmail.test(email)) alert('E-mail não informado ou incorreto');
+    else if (!regexCPF.test(cpf)) alert('CPF não informado ou incorreto');
+    else if (!regexPhone.test(phone)) alert('Telefone não informado ou incorreto');
+    else navigate('/');
   };
 
   const handleExit = (e) => {
@@ -76,7 +77,6 @@ function FormRegister(props) {
       </select>
       <button
         type="submit"
-        disabled={ !isDisabled }
       >
         Criar
       </button>
