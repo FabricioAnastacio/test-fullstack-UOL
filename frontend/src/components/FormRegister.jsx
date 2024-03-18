@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/FormRegister.css';
+import { createUser } from '../services/requests';
 
 function FormRegister(props) {
   const { navigate } = props;
@@ -10,9 +11,17 @@ function FormRegister(props) {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('Ativo');
 
-  useEffect(() => {}, []);
+  const createNewUser = async () => {
+    await createUser({
+      name,
+      email,
+      cpf,
+      phone,
+      status,
+    });
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const regexName = /^([A-Z]{1}[a-z ]+)$/;
@@ -24,7 +33,10 @@ function FormRegister(props) {
     else if (!regexEmail.test(email)) alert('E-mail não informado ou incorreto');
     else if (!regexCPF.test(cpf)) alert('CPF não informado ou incorreto');
     else if (!regexPhone.test(phone)) alert('Telefone não informado ou incorreto');
-    else navigate('/');
+    else {
+      await createNewUser();
+      navigate('/');
+    }
   };
 
   const handleExit = (e) => {

@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../services/fetchAPI';
+import { requestDataUsers } from '../services/requests';
 import '../styles/ListCustomers.css';
 
 function ListCustomers() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setUsers(api);
+    (
+      async () => {
+        try {
+          const allUsers = await requestDataUsers();
+          setUsers(allUsers);
+        } catch (e) {
+          setUsers([]);
+        }
+      }
+    )();
   }, []);
 
   return (
