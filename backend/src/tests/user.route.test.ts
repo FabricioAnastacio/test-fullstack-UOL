@@ -113,3 +113,46 @@ describe('Testa a rota post/user', () => {
 
   afterEach(sinon.restore);
 })
+
+describe('Testa a rota get/user', () => {
+  it('Verifica se é possivel visualizar todos os usuarios cadastrados', async () => {
+    sinon.stub(UserModel, 'findAll').resolves(findAllResponse as any);
+
+    const { status, body } = await chai.request(app).get('/user');
+
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(findAllResponse);
+  });
+
+  it('Verifica se é retornado um erro caso não exita usuarios cadastrados', async () => {
+    sinon.stub(UserModel, 'findAll').resolves(undefined);
+
+    const { status, body } = await chai.request(app).get('/user');
+
+    expect(status).to.equal(404);
+    expect(body).to.deep.equal({ message: 'Users not found' });
+  });
+
+  it('Verifica se é possivel buscar por nome de usuario', async () => {
+    sinon.stub(UserModel, 'findOne').resolves(mockUser as any);
+
+    const { status, body } = await chai.request(app).get('/user/search')
+    .query({ q: 'Juca' });
+
+    expect(status).to.equal(200);
+    expect(body).to.deep.equal(mockUser);
+  });
+
+  it('Verifica se é retornado um erro caso o nome passado não seja encontrado', async () => {
+    sinon.stub(UserModel, 'findOne').resolves(null);
+
+    const { status, body } = await chai.request(app).get('/user/search')
+    .query({ q: 'Silvio' });
+
+    expect(status).to.equal(404);
+    expect(body).to.deep.equal({ message: "Users not found" });
+  });
+
+  afterEach(sinon.restore);
+})
+
