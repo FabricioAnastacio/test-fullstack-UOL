@@ -66,7 +66,7 @@ function FormRegister(props) {
     const regexName = /^([A-Z]{1}[a-z ]+[A-Z+a-z ]+)$/;
     const regexEmail = /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
     const regexCPF = /^([0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2})$/;
-    const regexPhone = /^\(?[1-9]{2}\)? ?(?:[2-8]|9[0-9])[0-9]{3}-?[0-9]{4}$/;
+    const regexPhone = /^\(?[1-9]{2}\)? ?(?:[1-9]|9[0-9])[0-9]{3}-?[0-9]{4}$/;
 
     if (!regexName.test(name)) alert('Nome não informado');
     else if (!regexEmail.test(email)) alert('E-mail não informado ou incorreto');
