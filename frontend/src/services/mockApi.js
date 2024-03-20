@@ -1,30 +1,30 @@
 export const mockUsers = [
   {
     name: 'Fabio',
-    email: 'fabio@gmail.com',
+    email: 'fabio@test.com',
     phone: '(31) 9078-7821',
-    cpf: '132.432.543-98',
+    cpf: '111.111.111-01',
     status: 'Ativo',
   },
   {
     name: 'Alisson',
-    email: 'Alisson@gmail.com',
+    email: 'Alisson@test.com',
     phone: '(31) 9923-5761',
-    cpf: '309.768.983-23',
+    cpf: '222.222.222-02',
     status: 'Desativado',
   },
   {
     name: 'Julio',
-    email: 'julio@gmail.com',
+    email: 'julio@test.com',
     phone: '(31) 2657-5221',
-    cpf: '158.786.653-09',
+    cpf: '333.333.333-03',
     status: 'Inativo',
   },
   {
     name: 'Lucas',
-    email: 'lucas@gmail.com',
+    email: 'lucas@test.com',
     phone: '(31) 9235-6781',
-    cpf: '165.432.783-28',
+    cpf: '444.444.444-04',
     status: 'Aguardando ativação',
   },
 ];

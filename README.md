@@ -2,40 +2,50 @@
 
 ## Descrição:
 
-Neste desafio, você deverá desenvolver um aplicativo fullstack que permita aos usuários visualizar e criar clientes. O aplicativo consiste em duas partes: o frontend e o backend. O frontend será responsável pela interface do usuário e a comunicação com a API. O backend será responsável pelo armazenamento e gerenciamento dos dados dos clientes.
+Aplicação fullstack desenvolvida com o proposito de facilitar a visualização, criação e edição de clientes da UOL
 
-## Requisitos do Frontend:
+## Funcionamento
 
-1. Exibir uma listagem de clientes contendo todas as informações conforme o layout fornecido.
-2. Permitir a criação de um novo cliente através de um formulário.
-3. Na tela de edição, fornecer alertas para o usuário em caso de dados inválidos.
-4. Realizar validação de CPF e telefone na tela de edição para garantir dados corretos e consistentes.
-5. Comunicar-se com a API para obter os dados dos clientes cadastrados.
+### `npm start`
 
-## Requisitos do Backend:
+Rode na pasta principal `./` onde tem o arquivo decker-compose.yml o comando:
+```cmd
+docker compose up -d --build
+```
 
-Criar uma API que ofereça endpoints para:
+E então o docker ira iniciar dois containers, um para o backend e um para o frontend que fara as intalações das dependências necessárias. A aplicação iniciará logo em seguida rodando-a na porta 3000.
 
-1. Obter a listagem de clientes cadastrados.
-2. Cadastrar um novo cliente com informações válidas.
-3. Atualizar informações de cliente existente.
-4. Armazenar os dados do cliente de forma persistente, com sugestão de uso do SQLite para essa finalidade.
+Link = [http://localhost:3000](http://localhost:3000)
 
-## Requisitos de Qualidade de Código:
+## Informações do Frontend:
 
-Escreva um código limpo, legível e bem organizado.
-Adote boas práticas de desenvolvimento e arquitetura.
+1. É possive na rota `/` vizualizar os clientes cadastrados.
+2. Na rota `/adduser` se encontra um formulario para cadastro de novos clientes.
+3. É permitido atualizar informações dos clientes, e é feita a validação de informações inseridas nos campos.
+5. É feita a comunição com a API.
 
-## Itens Desejáveis (opcional):
+## Informações do Backend:
 
-- Testes unitários
-- Bibliotecas ou frameworks adicionais
+Desenvolvido uma API que contem esssa caracteristicas:
+
+1. Obetem a listagem de clientes cadastrados.
+2. Cadastra um novo cliente com informações válidas.
+3. Atualiza informações de cliente existente.
+4. Armazena os dados do cliente de forma persistente, com o uso do SQLite para essa finalidade.
+
+### Requisitos de Qualidade de Código:
+
+Foi utilizado a arquitetura MSC de camadas.
 
 ## Telas:
 
-- [Tela Inicial](https://test-frontend-uolpp.web.app/assets/images/tela-inicial.jpg)
-- [Tela de Edição](https://test-frontend-uolpp.web.app/assets/images/tela-edicao.jpg)
+<div align="center">
+  <p>- Tela inicia -</p>
+  <img src="./frontend/public/img/Captura de tela de 2024-03-20 16-06-59.png" alt="Tela inicial" width="800px" />
+  <p>- Tela de edição -</p>
+  <img src="./frontend/public/img/Captura de tela de 2024-03-20 15-02-32.png" alt="Tela de Edição" width="800px" />
+</div>
 
-## Instruções Finais:
-
-Após concluir o desafio, crie um pull request neste repositório com duas pastas separadas: uma contendo o projeto frontend e outra com o projeto backend, para que possamos avaliar seu trabalho. Boa sorte!
+#
+#
+### Desenvolvido por [Fabrício Anastácio Rodrigues](https://www.linkedin.com/in/far-dev/)

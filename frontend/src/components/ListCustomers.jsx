@@ -25,7 +25,7 @@ function ListCustomers(props) {
 
   const handleEditUser = (user) => {
     setEditUser(user);
-    navigate('/addUser');
+    navigate('/adduser');
   };
 
   return (

@@ -11,7 +11,7 @@ function Customers() {
 
   const handleClick = () => {
     setEditUser({});
-    navigate('/addUser');
+    navigate('/adduser');
   };
 
   return (
