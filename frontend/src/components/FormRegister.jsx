@@ -26,23 +26,38 @@ function FormRegister(props) {
   }, [editUser]);
 
   const createNewUser = async () => {
-    await createUser({
-      name,
-      email,
-      cpf,
-      phone,
-      status,
-    });
+    try {
+      await createUser({
+        name,
+        email,
+        cpf,
+        phone,
+        status,
+      });
+      navigate('/');
+    } catch (e) {
+      setEmail('');
+      setCpf('');
+      alert('E-mail ou CPF já existe');
+    }
   };
 
   const updateDataUser = async () => {
-    await updateUser(`/user/${editUser.id}`, {
-      name,
-      email,
-      cpf,
-      phone,
-      status,
-    });
+    try {
+      await updateUser(`/user/${editUser.id}`, {
+        name,
+        email,
+        cpf,
+        phone,
+        status,
+      });
+      setEditUser({});
+      navigate('/');
+    } catch (e) {
+      setEmail('');
+      setCpf('');
+      alert('E-mail ou CPF já existe');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -59,11 +74,8 @@ function FormRegister(props) {
     else if (!regexPhone.test(phone)) alert('Telefone não informado ou incorreto');
     else if (editUser.id) {
       await updateDataUser();
-      setEditUser({});
-      navigate('/');
     } else {
       await createNewUser();
-      navigate('/');
     }
   };
 
